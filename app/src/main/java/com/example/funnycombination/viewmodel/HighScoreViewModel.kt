@@ -18,9 +18,11 @@ class HighScoreViewModel(application: Application) : AndroidViewModel(applicatio
     fun loadHighScores() {
         viewModelScope.launch {
             try {
-                val scores = repository.getAll()
-                _highScores.value = scores
-                Log.d("HighScoreVM", "Loaded ${scores.size} scores")
+                // Завантажуємо всі результати, але показуємо тільки топ-3
+                val allScores = repository.getAll()
+                val topScores = allScores.sortedByDescending { it.score }.take(3)
+                _highScores.value = topScores
+                Log.d("HighScoreVM", "Loaded ${allScores.size} scores, showing top 3")
                 
                 // Додаткова діагностика
                 repository.getAllById()
@@ -42,7 +44,7 @@ class HighScoreViewModel(application: Application) : AndroidViewModel(applicatio
                 if (score > 0 && isBest) {
                     val entity = HighScoreEntity(date = date, score = score)
                     repository.insert(entity)
-                    loadHighScores()
+                    loadHighScores() // Перезавантажуємо тільки топ-3
                     onResult(true)
                     Log.d("HighScoreVM", "Score saved as new high score")
                 } else {
@@ -70,5 +72,10 @@ class HighScoreViewModel(application: Application) : AndroidViewModel(applicatio
 
     suspend fun isNewHighScore(score: Int): Boolean {
         return repository.isNewHighScore(score)
+    }
+    
+    // Метод для отримання тільки топ-3 результатів
+    fun getTopScores(): List<HighScoreEntity> {
+        return _highScores.value.sortedByDescending { it.score }.take(3)
     }
 } 

@@ -24,6 +24,9 @@ class GameViewModel : ViewModel() {
         private set
     val sequence: List<String> get() = _sequence
     val userInput: List<String> get() = _userInput
+    
+    // Метод для отримання поточного рахунку (кількість успішно пройдених рівнів)
+    val currentScore: Int get() = level - 1
 
     fun startGame() {
         _sequence.clear()

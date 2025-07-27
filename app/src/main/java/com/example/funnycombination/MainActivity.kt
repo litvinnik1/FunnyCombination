@@ -103,9 +103,9 @@ class MainActivity : ComponentActivity() {
                         if (navigateToGameOver) {
                             // Переходимо на GameOverScreen
                             LaunchedEffect(Unit) {
-                                val score = gameViewModel.userInput.size - 1
+                                val score = gameViewModel.currentScore
                                 Log.d("HighScore", "=== GAME OVER ===")
-                                Log.d("HighScore", "User input size: ${gameViewModel.userInput.size}")
+                                Log.d("HighScore", "Current level: ${gameViewModel.level}")
                                 Log.d("HighScore", "Calculated score: $score")
                                 Log.d("HighScore", "Navigating to game_over with score: $score")
                                 navController.navigate("game_over/$score") {
@@ -133,6 +133,8 @@ class MainActivity : ComponentActivity() {
                         val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
                         Log.d("HighScore", "Current date: $date")
                         var isHighScore by remember { mutableStateOf(false) }
+                        var isProcessing by remember { mutableStateOf(true) }
+                        
                         LaunchedEffect(score) {
                             Log.d("HighScore", "=== PROCESSING SCORE ===")
                             Log.d("HighScore", "Processing score: $score")
@@ -142,25 +144,30 @@ class MainActivity : ComponentActivity() {
                                     Log.d("HighScore", "=== CALLBACK RECEIVED ===")
                                     Log.d("HighScore", "Is best score: $isBest")
                                     isHighScore = isBest
+                                    isProcessing = false
                                 }
                             } else {
                                 Log.d("HighScore", "Score is 0 or negative, not saving")
+                                isProcessing = false
                             }
                         }
-                        GameOverScreen(
-                            score = score,
-                            isHighScore = isHighScore,
-                            onMainMenu = {
-                                navController.navigate("main_menu") {
-                                    popUpTo("game_over/{score}") { inclusive = true }
+                        
+                        if (!isProcessing) {
+                            GameOverScreen(
+                                score = score,
+                                isHighScore = isHighScore,
+                                onMainMenu = {
+                                    navController.navigate("main_menu") {
+                                        popUpTo("game_over/{score}") { inclusive = true }
+                                    }
+                                },
+                                onPlayAgain = {
+                                    navController.navigate("game") {
+                                        popUpTo("game_over/{score}") { inclusive = true }
+                                    }
                                 }
-                            },
-                            onPlayAgain = {
-                                navController.navigate("game") {
-                                    popUpTo("game_over/{score}") { inclusive = true }
-                                }
-                            }
-                        )
+                            )
+                        }
                     }
                     composable("high_score") {
                         val context = LocalContext.current
