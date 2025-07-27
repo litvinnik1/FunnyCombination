@@ -7,5 +7,6 @@ import androidx.room.PrimaryKey
 data class HighScoreEntity(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val date: String,
-    val score: Int
+    val score: Int,
+    val timestamp: Long = System.currentTimeMillis()
 ) 

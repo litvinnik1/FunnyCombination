@@ -41,6 +41,7 @@ import java.util.Locale
 import androidx.compose.runtime.collectAsState
 import com.example.funnycombination.viewmodel.HighScoreViewModelFactory
 import android.app.Application
+import android.util.Log
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -102,7 +103,12 @@ class MainActivity : ComponentActivity() {
                         if (navigateToGameOver) {
                             // Переходимо на GameOverScreen
                             LaunchedEffect(Unit) {
-                                navController.navigate("game_over") {
+                                val score = gameViewModel.userInput.size - 1
+                                Log.d("HighScore", "=== GAME OVER ===")
+                                Log.d("HighScore", "User input size: ${gameViewModel.userInput.size}")
+                                Log.d("HighScore", "Calculated score: $score")
+                                Log.d("HighScore", "Navigating to game_over with score: $score")
+                                navController.navigate("game_over/$score") {
                                     popUpTo("game") { inclusive = true }
                                 }
                             }
@@ -116,35 +122,42 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                     }
-                    composable("game_over") {
-                        val gameViewModel: GameViewModel = viewModel()
+                    composable("game_over/{score}") { backStackEntry ->
+                        val score = backStackEntry.arguments?.getString("score")?.toIntOrNull() ?: 0
+                        Log.d("HighScore", "=== GAME OVER SCREEN ===")
+                        Log.d("HighScore", "Received score in game_over: $score")
                         val context = LocalContext.current
                         val highScoreViewModel: HighScoreViewModel = viewModel(
                             factory = HighScoreViewModelFactory(context.applicationContext as Application)
                         )
-                        val score = gameViewModel.sequence.size
                         val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+                        Log.d("HighScore", "Current date: $date")
                         var isHighScore by remember { mutableStateOf(false) }
                         LaunchedEffect(score) {
-                            highScoreViewModel.addHighScoreIfBest(date, score) { isBest ->
-                                isHighScore = isBest
+                            Log.d("HighScore", "=== PROCESSING SCORE ===")
+                            Log.d("HighScore", "Processing score: $score")
+                            if (score > 0) {
+                                Log.d("HighScore", "Score > 0, calling addHighScoreIfBest")
+                                highScoreViewModel.addHighScoreIfBest(date, score) { isBest ->
+                                    Log.d("HighScore", "=== CALLBACK RECEIVED ===")
+                                    Log.d("HighScore", "Is best score: $isBest")
+                                    isHighScore = isBest
+                                }
+                            } else {
+                                Log.d("HighScore", "Score is 0 or negative, not saving")
                             }
                         }
-                        val highScores by highScoreViewModel.highScores.collectAsState()
-                        val maxScore = highScores.maxOfOrNull { it.score } ?: 0
-                        val correctCount = gameViewModel.userInput.size - 1
                         GameOverScreen(
-                            score = correctCount,
+                            score = score,
                             isHighScore = isHighScore,
                             onMainMenu = {
                                 navController.navigate("main_menu") {
-                                    popUpTo("game_over") { inclusive = true }
+                                    popUpTo("game_over/{score}") { inclusive = true }
                                 }
                             },
                             onPlayAgain = {
-                                gameViewModel.resetGame()
                                 navController.navigate("game") {
-                                    popUpTo("game_over") { inclusive = true }
+                                    popUpTo("game_over/{score}") { inclusive = true }
                                 }
                             }
                         )
@@ -155,11 +168,22 @@ class MainActivity : ComponentActivity() {
                             factory = HighScoreViewModelFactory(context.applicationContext as Application)
                         )
                         val highScores by highScoreViewModel.highScores.collectAsState()
-                        LaunchedEffect(Unit) { highScoreViewModel.loadHighScores() }
+                        LaunchedEffect(Unit) {
+                            Log.d("HighScore", "=== HIGH SCORE SCREEN ===")
+                            Log.d("HighScore", "Loading high scores...")
+                            highScoreViewModel.loadHighScores()
+                            Log.d("HighScore", "Loaded ${highScores.size} scores")
+                            highScores.forEach { score ->
+                                Log.d("HighScore", "Score: ${score.score}, Date: ${score.date}")
+                            }
+                        }
                         HighScoreScreen(
                             highScores = highScores,
                             onBack = {
                                 navController.popBackStack()
+                            },
+                            onClearScores = {
+                                highScoreViewModel.clearAllScores()
                             }
                         )
                     }

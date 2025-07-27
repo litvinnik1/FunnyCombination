@@ -14,13 +14,15 @@ import androidx.compose.material3.MaterialTheme
 @Composable
 fun HighScoreScreen(
     highScores: List<HighScoreEntity>,
-    onBack: () -> Unit
+    onBack: () -> Unit,
+    onClearScores: () -> Unit = {}
 ) {
     Column(
         modifier = Modifier.fillMaxSize().padding(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(text = "High Scores", modifier = Modifier.padding(bottom = 16.dp))
+        Text(text = "Total scores: ${highScores.size}", modifier = Modifier.padding(bottom = 8.dp))
         Row(
             modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp),
             horizontalArrangement = Arrangement.SpaceBetween
@@ -48,8 +50,13 @@ fun HighScoreScreen(
             }
         }
         Spacer(modifier = Modifier.weight(1f))
-        Button(onClick = onBack) {
-            Text("Назад")
+        Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+            Button(onClick = onBack) {
+                Text("Назад")
+            }
+            Button(onClick = onClearScores) {
+                Text("Очистити")
+            }
         }
     }
 } 
