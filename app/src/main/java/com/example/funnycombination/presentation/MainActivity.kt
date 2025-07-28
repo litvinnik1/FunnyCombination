@@ -1,4 +1,4 @@
-package com.example.funnycombination
+package com.example.funnycombination.presentation
 
 import android.app.Activity
 import android.os.Bundle
@@ -8,38 +8,36 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.funnycombination.ui.SplashScreen
-import com.example.funnycombination.ui.theme.FunnyCombinationTheme
-import com.example.funnycombination.ui.MainMenuScreen
+import com.example.funnycombination.presentation.screens.SplashScreen
+import com.example.funnycombination.presentation.theme.FunnyCombinationTheme
+import com.example.funnycombination.presentation.screens.MainMenuScreen
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.funnycombination.viewmodel.GameViewModel
-import com.example.funnycombination.viewmodel.GameState
+import com.example.funnycombination.presentation.viewmodels.GameViewModel
+import com.example.funnycombination.presentation.state.GameState
 import kotlinx.coroutines.delay
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
-import com.example.funnycombination.ui.GameScreen
+import com.example.funnycombination.presentation.screens.GameScreen
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
-import com.example.funnycombination.ui.GameOverScreen
-import com.example.funnycombination.viewmodel.HighScoreViewModel
+import com.example.funnycombination.presentation.screens.GameOverScreen
+import com.example.funnycombination.presentation.viewmodels.HighScoreViewModel
 import com.example.funnycombination.data.HighScoreEntity
-import com.example.funnycombination.ui.HighScoreScreen
-import com.example.funnycombination.ui.PrivacyPolicyScreen
+import com.example.funnycombination.presentation.screens.HighScoreScreen
+import com.example.funnycombination.presentation.screens.PrivacyPolicyScreen
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import androidx.compose.runtime.collectAsState
-import com.example.funnycombination.viewmodel.HighScoreViewModelFactory
+import com.example.funnycombination.presentation.viewmodels.HighScoreViewModelFactory
 import android.app.Application
 import android.util.Log
 
@@ -201,20 +199,4 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    FunnyCombinationTheme {
-        Greeting("Android")
-    }
-}
+} 

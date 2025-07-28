@@ -1,6 +1,6 @@
 # Funny Combination - Android Game
 
-Це Android гра, розроблена з використанням Jetpack Compose, де гравці повинні повторювати послідовність емодзі.
+Це Android гра, розроблена з використанням Jetpack Compose та MVVM архітектури, де гравці повинні повторювати послідовність емодзі.
 
 ## Функціональність
 
@@ -22,16 +22,81 @@
 - Красивий дизайн з анімацією
 - Кнопки "Грати знову" та "Головне меню"
 
+## Архітектура MVVM
+
+Проект використовує сучасну MVVM (Model-View-ViewModel) архітектуру:
+
+### Структура проекту
+```
+app/src/main/java/com/example/funnycombination/
+├── data/                    # Data Layer
+│   ├── AppDatabase.kt      # Room Database
+│   ├── HighScoreDao.kt     # Data Access Object
+│   ├── HighScoreEntity.kt  # Entity
+│   └── HighScoreRepository.kt # Repository
+├── presentation/            # Presentation Layer
+│   ├── MainActivity.kt     # Main Activity
+│   ├── screens/            # UI Screens
+│   │   ├── SplashScreen.kt
+│   │   ├── MainMenuScreen.kt
+│   │   ├── GameScreen.kt
+│   │   ├── GameOverScreen.kt
+│   │   ├── HighScoreScreen.kt
+│   │   └── PrivacyPolicyScreen.kt
+│   ├── viewmodels/         # ViewModels
+│   │   ├── GameViewModel.kt
+│   │   ├── HighScoreViewModel.kt
+│   │   ├── GameOverViewModel.kt
+│   │   ├── NavigationViewModel.kt
+│   │   └── HighScoreViewModelFactory.kt
+│   ├── state/              # State Classes
+│   │   └── GameState.kt
+│   ├── event/              # Event Classes
+│   │   └── GameEvents.kt
+│   └── theme/              # UI Theme
+│       ├── Theme.kt
+│       ├── Color.kt
+│       └── Type.kt
+└── di/                     # Dependency Injection
+```
+
+### MVVM Компоненти
+
+#### ViewModels
+- **GameViewModel** - управляє станом гри та логікою
+- **HighScoreViewModel** - управляє high score системою
+- **GameOverViewModel** - управляє екраном завершення гри
+- **NavigationViewModel** - управляє навігацією між екранами
+
+#### State Management
+- **GameScreenState** - стан екрану гри
+- **HighScoreState** - стан high score екрану
+- **GameOverState** - стан екрану завершення гри
+- **NavigationState** - стан навігації
+
+#### Event Handling
+- **GameEvent** - події гри (StartGame, OnEmojiClick, тощо)
+- **HighScoreEvent** - події high score (LoadHighScores, AddHighScore, тощо)
+- **GameOverEvent** - події завершення гри
+
 ## Технології
 
 - **Jetpack Compose** - UI фреймворк
+- **MVVM Architecture** - архітектурний патерн
 - **Room Database** - локальне зберігання даних
 - **ViewModel** - управління станом
 - **Navigation Compose** - навігація між екранами
 - **Coroutines** - асинхронні операції
 - **Material Design 3** - дизайн система
+- **StateFlow** - реактивний потік даних
 
 ## Останні зміни
+
+### Архітектурні зміни
+- **Повна реорганізація на MVVM** - чіткий поділ на слої
+- **State Management** - централізоване управління станом
+- **Event-Driven Architecture** - подієво-орієнтована архітектура
+- **Separation of Concerns** - розділення відповідальності
 
 ### High Score Screen
 - Показує тільки 3 найкращих результати
@@ -51,22 +116,28 @@
 - Покращена обробка стану гри
 - Кращий логінг для діагностики
 
-## Структура проекту
-
-```
-app/src/main/java/com/example/funnycombination/
-├── data/           # База даних та репозиторій
-├── di/             # Dependency injection
-├── ui/             # Екрани та компоненти UI
-├── viewmodel/      # ViewModels для управління станом
-└── MainActivity.kt # Головна активність
-```
-
 ## Запуск
 
 1. Відкрийте проект в Android Studio
 2. Синхронізуйте Gradle файли
 3. Запустіть на емуляторі або реальному пристрої
+
+## Переваги MVVM архітектури
+
+### Тестування
+- Легке тестування ViewModels
+- Ізольовані компоненти
+- Можливість мокати залежності
+
+### Підтримка
+- Чітка структура коду
+- Легке додавання нових функцій
+- Розділення відповідальності
+
+### Масштабованість
+- Модульна архітектура
+- Легке розширення функціональності
+- Готовність до Dependency Injection
 
 ## Ліцензія
 
