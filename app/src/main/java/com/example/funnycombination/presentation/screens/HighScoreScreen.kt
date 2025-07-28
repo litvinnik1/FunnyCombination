@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.funnycombination.data.HighScoreEntity
+import com.example.funnycombination.domain.model.HighScore
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -18,7 +18,7 @@ import androidx.compose.ui.graphics.Color
 
 @Composable
 fun HighScoreScreen(
-    highScores: List<HighScoreEntity>,
+    highScores: List<HighScore>,
     onBack: () -> Unit,
     onClearScores: () -> Unit = {}
 ) {

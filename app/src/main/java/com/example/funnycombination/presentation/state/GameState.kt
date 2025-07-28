@@ -1,23 +1,19 @@
 package com.example.funnycombination.presentation.state
 
-import com.example.funnycombination.data.HighScoreEntity
+import com.example.funnycombination.domain.model.HighScore
 
 // State для гри
 data class GameScreenState(
     val sequence: List<String> = emptyList(),
     val userInput: List<String> = emptyList(),
     val level: Int = 1,
-    val gameState: GameState = GameState.ShowingSequence,
+    val gameState: com.example.funnycombination.domain.model.GameState = com.example.funnycombination.domain.model.GameState.ShowingSequence,
     val demoEmoji: String? = null,
     val isInputEnabled: Boolean = false,
     val navigateToGameOver: Boolean = false
 )
 
-sealed class GameState {
-    object ShowingSequence : GameState()
-    object WaitingForInput : GameState()
-    object GameOver : GameState()
-}
+// Видаляємо дублікат GameState, оскільки він тепер в domain layer
 
 // State для Game Over екрану
 data class GameOverState(
@@ -28,7 +24,7 @@ data class GameOverState(
 
 // State для High Score екрану
 data class HighScoreState(
-    val highScores: List<HighScoreEntity> = emptyList(),
+    val highScores: List<HighScore> = emptyList(),
     val isLoading: Boolean = false,
     val error: String? = null
 )

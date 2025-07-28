@@ -32,6 +32,7 @@ import androidx.compose.runtime.LaunchedEffect
 fun GameOverScreen(
     score: Int,
     isHighScore: Boolean,
+    isTiedScore: Boolean = false,
     onMainMenu: () -> Unit,
     onPlayAgain: () -> Unit
 ) {
@@ -121,7 +122,7 @@ fun GameOverScreen(
                     }
                     
                     // Повідомлення про high score
-                    if (isHighScore) {
+                    if (isHighScore && !isTiedScore) {
                         Card(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -148,6 +149,37 @@ fun GameOverScreen(
                                 )
                                 Text(
                                     text = " 🏆",
+                                    fontSize = 24.sp
+                                )
+                            }
+                        }
+                    } else if (isTiedScore) {
+                        Card(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 8.dp),
+                            colors = CardDefaults.cardColors(
+                                containerColor = Color(0xFF87CEEB).copy(alpha = 0.3f)
+                            ),
+                            elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+                        ) {
+                            Row(
+                                horizontalArrangement = Arrangement.Center,
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier.padding(16.dp)
+                            ) {
+                                Text(
+                                    text = "🔄 ",
+                                    fontSize = 24.sp
+                                )
+                                Text(
+                                    text = "Повторення рекорду!",
+                                    fontSize = 18.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = MaterialTheme.colorScheme.secondary
+                                )
+                                Text(
+                                    text = " 🔄",
                                     fontSize = 24.sp
                                 )
                             }

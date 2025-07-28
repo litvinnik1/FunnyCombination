@@ -1,11 +1,13 @@
-package com.example.funnycombination.data
+package com.example.funnycombination.data.local
 
-import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import android.content.Context
+import com.example.funnycombination.data.local.dao.HighScoreDao
+import com.example.funnycombination.data.local.entity.HighScoreEntity
 
-@Database(entities = [HighScoreEntity::class], version = 2, exportSchema = false)
+@Database(entities = [HighScoreEntity::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun highScoreDao(): HighScoreDao
 
@@ -18,10 +20,8 @@ abstract class AppDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "funny_combination_db"
-                )
-                .fallbackToDestructiveMigration()
-                .build()
+                    "funny_combination_database"
+                ).build()
                 INSTANCE = instance
                 instance
             }

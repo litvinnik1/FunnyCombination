@@ -5,14 +5,17 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.example.funnycombination.presentation.state.GameScreenState
-import com.example.funnycombination.presentation.state.GameState
+import com.example.funnycombination.domain.model.GameState
 import com.example.funnycombination.presentation.event.GameEvent
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlin.random.Random
+import javax.inject.Inject
+import dagger.hilt.android.lifecycle.HiltViewModel
 
-class GameViewModel : ViewModel() {
+@HiltViewModel
+class GameViewModel @Inject constructor() : ViewModel() {
     private val emojis = listOf("😀", "🐱", "🍕", "🚗", "⚽")
     private val _sequence = mutableListOf<String>()
     private val _userInput = mutableListOf<String>()

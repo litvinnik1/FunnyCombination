@@ -6,8 +6,11 @@ import com.example.funnycombination.presentation.event.GameOverEvent
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import javax.inject.Inject
+import dagger.hilt.android.lifecycle.HiltViewModel
 
-class GameOverViewModel : ViewModel() {
+@HiltViewModel
+class GameOverViewModel @Inject constructor() : ViewModel() {
     
     // State
     private val _state = MutableStateFlow(GameOverState())

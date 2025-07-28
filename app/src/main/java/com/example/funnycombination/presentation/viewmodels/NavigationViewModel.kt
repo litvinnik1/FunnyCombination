@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import javax.inject.Inject
+import dagger.hilt.android.lifecycle.HiltViewModel
 
 sealed class NavigationEvent {
     object NavigateToSplash : NavigationEvent()
@@ -22,7 +24,8 @@ data class NavigationState(
     val isNavigating: Boolean = false
 )
 
-class NavigationViewModel : ViewModel() {
+@HiltViewModel
+class NavigationViewModel @Inject constructor() : ViewModel() {
     
     private val _state = MutableStateFlow(NavigationState())
     val state: StateFlow<NavigationState> = _state.asStateFlow()

@@ -19,8 +19,9 @@ import com.example.funnycombination.presentation.screens.SplashScreen
 import com.example.funnycombination.presentation.theme.FunnyCombinationTheme
 import com.example.funnycombination.presentation.screens.MainMenuScreen
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.funnycombination.presentation.viewmodels.GameViewModel
-import com.example.funnycombination.presentation.state.GameState
+import com.example.funnycombination.domain.model.GameState
 import kotlinx.coroutines.delay
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -30,17 +31,17 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import com.example.funnycombination.presentation.screens.GameOverScreen
 import com.example.funnycombination.presentation.viewmodels.HighScoreViewModel
-import com.example.funnycombination.data.HighScoreEntity
+import com.example.funnycombination.domain.model.HighScore
 import com.example.funnycombination.presentation.screens.HighScoreScreen
 import com.example.funnycombination.presentation.screens.PrivacyPolicyScreen
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import androidx.compose.runtime.collectAsState
-import com.example.funnycombination.presentation.viewmodels.HighScoreViewModelFactory
-import android.app.Application
 import android.util.Log
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,7 +72,7 @@ class MainActivity : ComponentActivity() {
                         )
                     }
                     composable("game") {
-                        val gameViewModel: GameViewModel = viewModel()
+                        val gameViewModel: GameViewModel = hiltViewModel()
                         LaunchedEffect(Unit) {
                             gameViewModel.startGame()
                         }
@@ -105,6 +106,7 @@ class MainActivity : ComponentActivity() {
                                 Log.d("HighScore", "=== GAME OVER ===")
                                 Log.d("HighScore", "Current level: ${gameViewModel.level}")
                                 Log.d("HighScore", "Calculated score: $score")
+                                Log.d("HighScore", "Game state: ${gameViewModel.gameState}")
                                 Log.d("HighScore", "Navigating to game_over with score: $score")
                                 navController.navigate("game_over/$score") {
                                     popUpTo("game") { inclusive = true }
@@ -124,13 +126,14 @@ class MainActivity : ComponentActivity() {
                         val score = backStackEntry.arguments?.getString("score")?.toIntOrNull() ?: 0
                         Log.d("HighScore", "=== GAME OVER SCREEN ===")
                         Log.d("HighScore", "Received score in game_over: $score")
-                        val context = LocalContext.current
-                        val highScoreViewModel: HighScoreViewModel = viewModel(
-                            factory = HighScoreViewModelFactory(context.applicationContext as Application)
-                        )
+                        Log.d("HighScore", "Score type: ${score::class.java.simpleName}")
+                        Log.d("HighScore", "Score > 0: ${score > 0}")
+                        
+                        val highScoreViewModel: HighScoreViewModel = hiltViewModel()
                         val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
                         Log.d("HighScore", "Current date: $date")
                         var isHighScore by remember { mutableStateOf(false) }
+                        var isTiedScore by remember { mutableStateOf(false) }
                         var isProcessing by remember { mutableStateOf(true) }
                         
                         LaunchedEffect(score) {
@@ -142,7 +145,18 @@ class MainActivity : ComponentActivity() {
                                     Log.d("HighScore", "=== CALLBACK RECEIVED ===")
                                     Log.d("HighScore", "Is best score: $isBest")
                                     isHighScore = isBest
-                                    isProcessing = false
+                                    
+                                    // Перевіряємо, чи це повторення рекорду
+                                    if (!isBest && score > 0) {
+                                        // Якщо не новий рекорд, перевіряємо чи це повторення
+                                        highScoreViewModel.checkIfTiedScore(score) { isTied ->
+                                            Log.d("HighScore", "Is tied score: $isTied")
+                                            isTiedScore = isTied
+                                            isProcessing = false
+                                        }
+                                    } else {
+                                        isProcessing = false
+                                    }
                                 }
                             } else {
                                 Log.d("HighScore", "Score is 0 or negative, not saving")
@@ -154,6 +168,7 @@ class MainActivity : ComponentActivity() {
                             GameOverScreen(
                                 score = score,
                                 isHighScore = isHighScore,
+                                isTiedScore = isTiedScore,
                                 onMainMenu = {
                                     navController.navigate("main_menu") {
                                         popUpTo("game_over/{score}") { inclusive = true }
@@ -168,10 +183,7 @@ class MainActivity : ComponentActivity() {
                         }
                     }
                     composable("high_score") {
-                        val context = LocalContext.current
-                        val highScoreViewModel: HighScoreViewModel = viewModel(
-                            factory = HighScoreViewModelFactory(context.applicationContext as Application)
-                        )
+                        val highScoreViewModel: HighScoreViewModel = hiltViewModel()
                         val highScores by highScoreViewModel.highScores.collectAsState()
                         LaunchedEffect(Unit) {
                             Log.d("HighScore", "=== HIGH SCORE SCREEN ===")
