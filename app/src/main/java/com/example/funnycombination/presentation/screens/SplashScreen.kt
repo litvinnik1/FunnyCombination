@@ -2,11 +2,13 @@ package com.example.funnycombination.presentation.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.graphics.Color
 import kotlinx.coroutines.delay
 
 @Composable
@@ -25,12 +27,14 @@ fun SplashScreen(onTimeout: () -> Unit) {
         ) {
             Text(
                 text = "🎮",
-                fontSize = 64.sp
+                fontSize = 64.sp,
+                color = Color.White
             )
             Spacer(modifier = Modifier.height(16.dp))
             Text(
                 text = "Funny Combination",
-                fontSize = 24.sp
+                fontSize = 24.sp,
+                color = Color.White
             )
         }
     }

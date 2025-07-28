@@ -30,6 +30,7 @@ fun HighScoreScreen(
             text = "🏆 High Scores",
             fontSize = 28.sp,
             fontWeight = FontWeight.Bold,
+            color = Color.White,
             modifier = Modifier.padding(bottom = 24.dp)
         )
         
@@ -46,7 +47,7 @@ fun HighScoreScreen(
                 Text(
                     text = "Рекордів ще немає",
                     fontSize = 18.sp,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = Color.White
                 )
             }
         } else {
@@ -60,17 +61,20 @@ fun HighScoreScreen(
                 Text(
                     text = "Місце",
                     fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp
+                    fontSize = 16.sp,
+                    color = Color.White
                 )
                 Text(
                     text = "Дата",
                     fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp
+                    fontSize = 16.sp,
+                    color = Color.White
                 )
                 Text(
                     text = "Результат",
                     fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp
+                    fontSize = 16.sp,
+                    color = Color.White
                 )
             }
             
@@ -103,14 +107,15 @@ fun HighScoreScreen(
                     Text(
                         text = placeEmoji,
                         fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White
                     )
                     
                     // Дата
                     Text(
                         text = score.date,
                         fontSize = 14.sp,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                        color = Color.White
                     )
                     
                     // Результат
@@ -118,10 +123,7 @@ fun HighScoreScreen(
                         text = score.score.toString(),
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Bold,
-                        color = when (place) {
-                            1 -> MaterialTheme.colorScheme.primary
-                            else -> MaterialTheme.colorScheme.onSurface
-                        }
+                        color = Color.White
                     )
                 }
                 
@@ -142,13 +144,13 @@ fun HighScoreScreen(
                 onClick = onBack,
                 modifier = Modifier.weight(1f)
             ) {
-                Text("Назад")
+                Text("Назад", color = Color.White)
             }
             Button(
                 onClick = onClearScores,
                 modifier = Modifier.weight(1f)
             ) {
-                Text("Очистити")
+                Text("Очистити", color = Color.White)
             }
         }
     }
