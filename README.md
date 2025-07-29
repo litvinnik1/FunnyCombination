@@ -1,6 +1,6 @@
 # Funny Combination - Android Game
 
-Це Android гра, де гравці повинні повторювати послідовність емодзі. Розроблена з використанням Jetpack Compose та чистої MVVM архітектури з трьома шарами (Data, Domain, Presentation) та Dependency Injection через Dagger Hilt.
+This is an Android game where players must repeat a sequence of emojis. It is developed using Jetpack Compose and a clean MVVM architecture with three layers (Data, Domain, Presentation) and Dependency Injection via Dagger Hilt.
 
 ## Functionality
 
