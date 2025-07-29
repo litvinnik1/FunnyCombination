@@ -25,7 +25,7 @@ This is an Android game where players must repeat a sequence of emojis. It is de
 ## Video Walkthrough
 
 
-![FunnyCombination](https://giphy.com/gifs/a1uRnFK2N3sVJ1vnhO)
+![FunnyCombination][([https://giphy.com/gifs/a1uRnFK2N3sVJ1vnhO](https://media.giphy.com/media/a1uRnFK2N3sVJ1vnhO/giphy.gif))](https://media.giphy.com/media/a1uRnFK2N3sVJ1vnhO/giphy.gif)
 
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
