@@ -85,8 +85,9 @@ fun GameOverScreen(
                     // Результат
                     Card(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 16.dp),
+                            .widthIn(max = 300.dp)
+                            .padding(vertical = 16.dp)
+                            .align(Alignment.CenterHorizontally),
                         colors = CardDefaults.cardColors(
                             containerColor = if (isHighScore) 
                                 Color(0xFFFFD700).copy(alpha = 0.2f) 
@@ -102,7 +103,8 @@ fun GameOverScreen(
                             Text(
                                 text = "Ваш результат",
                                 fontSize = 16.sp,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                textAlign = TextAlign.Center
                             )
                             Text(
                                 text = score.toString(),
@@ -111,12 +113,14 @@ fun GameOverScreen(
                                 color = if (isHighScore) 
                                     MaterialTheme.colorScheme.primary 
                                 else 
-                                    MaterialTheme.colorScheme.onSurface
+                                    MaterialTheme.colorScheme.onSurface,
+                                textAlign = TextAlign.Center
                             )
                             Text(
                                 text = "рівень",
                                 fontSize = 14.sp,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                textAlign = TextAlign.Center
                             )
                         }
                     }
