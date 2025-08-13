@@ -25,8 +25,8 @@ This is an Android game where players must repeat a sequence of emojis. It is de
 ## Video Walkthrough
 
 
-![FunnyCombinationVideo](https://github.com/user-attachments/assets/d46b2063-bb17-41bb-94cc-e2d707293ccd)
-![FunnyCombinationGameVideo](https://github.com/user-attachments/assets/fa44daec-f9d8-48bc-b30f-873223f9532d)
+![FunnyCombinationGameVideo](https://github.com/user-attachments/assets/0856e1ba-6dc1-4daa-9af3-39a13886d38c)
+
 
 
 
