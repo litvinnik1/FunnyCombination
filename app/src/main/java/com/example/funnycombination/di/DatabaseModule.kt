@@ -1,7 +1,6 @@
 package com.example.funnycombination.di
 
 import android.content.Context
-import android.util.Log
 import com.example.funnycombination.data.local.AppDatabase
 import com.example.funnycombination.data.local.dao.HighScoreDao
 import dagger.Module
@@ -18,18 +17,12 @@ object DatabaseModule {
     @Provides
     @Singleton
     fun provideDatabase(@ApplicationContext context: Context): AppDatabase {
-        Log.d("DatabaseModule", "Creating database...")
-        val database = AppDatabase.getDatabase(context)
-        Log.d("DatabaseModule", "Database created successfully")
-        return database
+        return AppDatabase.getDatabase(context)
     }
 
     @Provides
     @Singleton
     fun provideHighScoreDao(database: AppDatabase): HighScoreDao {
-        Log.d("DatabaseModule", "Creating HighScoreDao...")
-        val dao = database.highScoreDao()
-        Log.d("DatabaseModule", "HighScoreDao created successfully")
-        return dao
+        return database.highScoreDao()
     }
 } 

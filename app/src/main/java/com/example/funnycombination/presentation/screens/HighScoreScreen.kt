@@ -15,6 +15,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import com.example.funnycombination.R
 
 @Composable
 fun HighScoreScreen(
@@ -27,7 +29,7 @@ fun HighScoreScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "🏆 High Scores",
+            text = stringResource(R.string.high_scores_title),
             fontSize = 28.sp,
             fontWeight = FontWeight.Bold,
             color = Color.White,
@@ -45,7 +47,7 @@ fun HighScoreScreen(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "Рекордів ще немає",
+                    text = stringResource(R.string.no_scores),
                     fontSize = 18.sp,
                     color = Color.White
                 )
@@ -59,19 +61,19 @@ fun HighScoreScreen(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "Місце",
+                    text = stringResource(R.string.place),
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp,
                     color = Color.White
                 )
                 Text(
-                    text = "Дата",
+                    text = stringResource(R.string.date),
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp,
                     color = Color.White
                 )
                 Text(
-                    text = "Результат",
+                    text = stringResource(R.string.result),
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp,
                     color = Color.White
@@ -144,13 +146,13 @@ fun HighScoreScreen(
                 onClick = onBack,
                 modifier = Modifier.weight(1f)
             ) {
-                Text("Назад", color = Color.White)
+                Text(stringResource(R.string.back), color = Color.White)
             }
             Button(
                 onClick = onClearScores,
                 modifier = Modifier.weight(1f)
             ) {
-                Text("Очистити", color = Color.White)
+                Text(stringResource(R.string.clear_all), color = Color.White)
             }
         }
     }

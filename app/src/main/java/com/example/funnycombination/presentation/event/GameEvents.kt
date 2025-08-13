@@ -5,7 +5,6 @@ sealed class GameEvent {
     object StartGame : GameEvent()
     object OnSequenceShown : GameEvent()
     data class OnEmojiClick(val emoji: String) : GameEvent()
-    object ResetGame : GameEvent()
 }
 
 // Events для High Score

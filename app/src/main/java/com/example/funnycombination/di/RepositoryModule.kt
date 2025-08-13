@@ -1,6 +1,5 @@
 package com.example.funnycombination.di
 
-import android.util.Log
 import com.example.funnycombination.data.repository.HighScoreRepositoryImpl
 import com.example.funnycombination.domain.repository.HighScoreRepository
 import dagger.Module
@@ -18,7 +17,6 @@ object RepositoryModule {
     fun provideHighScoreRepository(
         highScoreRepositoryImpl: HighScoreRepositoryImpl
     ): HighScoreRepository {
-        Log.d("RepositoryModule", "Providing HighScoreRepository...")
         return highScoreRepositoryImpl
     }
 } 

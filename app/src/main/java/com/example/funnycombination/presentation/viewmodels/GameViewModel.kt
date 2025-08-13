@@ -40,7 +40,6 @@ class GameViewModel @Inject constructor() : ViewModel() {
             is GameEvent.StartGame -> startGameInternal()
             is GameEvent.OnSequenceShown -> onSequenceShownInternal()
             is GameEvent.OnEmojiClick -> onEmojiClickInternal(event.emoji)
-            is GameEvent.ResetGame -> resetGameInternal()
         }
     }
 
@@ -55,10 +54,6 @@ class GameViewModel @Inject constructor() : ViewModel() {
     
     fun onEmojiClick(emoji: String) {
         onEvent(GameEvent.OnEmojiClick(emoji))
-    }
-    
-    fun resetGame() {
-        onEvent(GameEvent.ResetGame)
     }
 
     private fun startGameInternal() {
@@ -97,10 +92,6 @@ class GameViewModel @Inject constructor() : ViewModel() {
             gameState = GameState.ShowingSequence
             updateState()
         }
-    }
-
-    private fun resetGameInternal() {
-        startGameInternal()
     }
     
     private fun updateState() {

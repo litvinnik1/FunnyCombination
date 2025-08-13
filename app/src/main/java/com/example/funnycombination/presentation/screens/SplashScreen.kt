@@ -9,6 +9,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import com.example.funnycombination.R
 import kotlinx.coroutines.delay
 
 @Composable
@@ -32,7 +34,7 @@ fun SplashScreen(onTimeout: () -> Unit) {
             )
             Spacer(modifier = Modifier.height(16.dp))
             Text(
-                text = "Funny Combination",
+                text = stringResource(R.string.app_name),
                 fontSize = 24.sp,
                 color = Color.White
             )

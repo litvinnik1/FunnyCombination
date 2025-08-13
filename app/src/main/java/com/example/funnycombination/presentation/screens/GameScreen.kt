@@ -11,6 +11,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import com.example.funnycombination.R
 
 @Composable
 fun GameScreen(
@@ -27,7 +29,7 @@ fun GameScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Рівень: $level",
+            text = "${stringResource(R.string.level)}: $level",
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
             color = Color.White,
@@ -47,7 +49,7 @@ fun GameScreen(
         // Показуємо введені користувачем емодзі
         if (userInput.isNotEmpty()) {
             Text(
-                text = "Ваші відповіді:",
+                text = stringResource(R.string.your_answers),
                 fontSize = 18.sp,
                 color = Color.White,
                 modifier = Modifier.padding(bottom = 8.dp)

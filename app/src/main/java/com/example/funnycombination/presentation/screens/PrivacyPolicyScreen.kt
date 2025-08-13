@@ -11,6 +11,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import com.example.funnycombination.R
 
 @Composable
 fun PrivacyPolicyScreen(onBack: () -> Unit) {
@@ -19,7 +21,7 @@ fun PrivacyPolicyScreen(onBack: () -> Unit) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "📋 Політика конфіденційності",
+            text = stringResource(R.string.privacy_policy_title),
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             color = Color.White,
@@ -27,7 +29,7 @@ fun PrivacyPolicyScreen(onBack: () -> Unit) {
         )
         
         Text(
-            text = "Цей додаток не збирає персональні дані користувачів. Всі дані зберігаються локально на пристрої.",
+            text = stringResource(R.string.privacy_policy_content),
             color = Color.White,
             modifier = Modifier.padding(bottom = 16.dp)
         )
@@ -35,7 +37,7 @@ fun PrivacyPolicyScreen(onBack: () -> Unit) {
         Spacer(modifier = Modifier.weight(1f))
         
         Button(onClick = onBack) {
-            Text("Назад", color = Color.White)
+            Text(stringResource(R.string.back), color = Color.White)
         }
     }
 } 

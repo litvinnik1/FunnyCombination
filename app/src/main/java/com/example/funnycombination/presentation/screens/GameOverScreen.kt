@@ -27,6 +27,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.res.stringResource
+import com.example.funnycombination.R
 
 @Composable
 fun GameOverScreen(
@@ -74,7 +76,7 @@ fun GameOverScreen(
                 ) {
                     // Заголовок
                     Text(
-                        text = "🎮 Game Over!",
+                        text = stringResource(R.string.game_over_title),
                         fontSize = 32.sp,
                         fontWeight = FontWeight.Bold,
                         color = MaterialTheme.colorScheme.primary,
@@ -101,7 +103,7 @@ fun GameOverScreen(
                             modifier = Modifier.padding(24.dp)
                         ) {
                             Text(
-                                text = "Ваш результат",
+                                text = stringResource(R.string.your_result),
                                 fontSize = 16.sp,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 textAlign = TextAlign.Center
@@ -117,7 +119,7 @@ fun GameOverScreen(
                                 textAlign = TextAlign.Center
                             )
                             Text(
-                                text = "рівень",
+                                text = stringResource(R.string.level),
                                 fontSize = 14.sp,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 textAlign = TextAlign.Center
@@ -146,7 +148,7 @@ fun GameOverScreen(
                                     fontSize = 24.sp
                                 )
                                 Text(
-                                    text = "Новий рекорд!",
+                                    text = stringResource(R.string.new_record),
                                     fontSize = 18.sp,
                                     fontWeight = FontWeight.Bold,
                                     color = MaterialTheme.colorScheme.primary
@@ -177,7 +179,7 @@ fun GameOverScreen(
                                     fontSize = 24.sp
                                 )
                                 Text(
-                                    text = "Повторення рекорду!",
+                                    text = stringResource(R.string.tied_record),
                                     fontSize = 18.sp,
                                     fontWeight = FontWeight.Bold,
                                     color = MaterialTheme.colorScheme.secondary
@@ -208,7 +210,7 @@ fun GameOverScreen(
                                     fontSize = 20.sp
                                 )
                                 Text(
-                                    text = "Спробуйте ще раз!",
+                                    text = stringResource(R.string.try_again),
                                     fontSize = 16.sp,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
@@ -235,7 +237,7 @@ fun GameOverScreen(
                             )
                         ) {
                             Text(
-                                text = "🔄 Грати знову",
+                                text = stringResource(R.string.play_again),
                                 fontSize = 16.sp,
                                 fontWeight = FontWeight.Medium
                             )
@@ -249,7 +251,7 @@ fun GameOverScreen(
                             )
                         ) {
                             Text(
-                                text = "🏠 Головне меню",
+                                text = stringResource(R.string.main_menu),
                                 fontSize = 16.sp,
                                 fontWeight = FontWeight.Medium
                             )

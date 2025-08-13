@@ -12,6 +12,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import com.example.funnycombination.R
 
 @Composable
 fun MainMenuScreen(
@@ -26,7 +28,7 @@ fun MainMenuScreen(
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "🎮 Funny Combination",
+            text = "🎮 ${stringResource(R.string.app_name)}",
             fontSize = 28.sp,
             fontWeight = FontWeight.Bold,
             color = Color.White,
@@ -37,28 +39,28 @@ fun MainMenuScreen(
             onClick = onPlay,
             modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)
         ) {
-            Text("🎯 Грати", color = Color.White)
+            Text("🎯 ${stringResource(R.string.play)}", color = Color.White)
         }
 
         Button(
             onClick = onHighScore,
             modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)
         ) {
-            Text("🏆 High Score", color = Color.White)
+            Text("🏆 ${stringResource(R.string.high_scores)}", color = Color.White)
         }
 
         Button(
             onClick = onPrivacyPolicy,
             modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)
         ) {
-            Text("📋 Політика конфіденційності", color = Color.White)
+            Text("📋 ${stringResource(R.string.privacy_policy)}", color = Color.White)
         }
 
         Button(
             onClick = onExit,
             modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)
         ) {
-            Text("🚪 Вихід", color = Color.White)
+            Text("🚪 ${stringResource(R.string.exit)}", color = Color.White)
         }
     }
 }

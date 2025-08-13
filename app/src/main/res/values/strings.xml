@@ -1,3 +1,45 @@
 <resources>
     <string name="app_name">Funny Combination</string>
+    
+    <!-- Main Menu -->
+    <string name="play">Грати</string>
+    <string name="high_scores">Рекорди</string>
+    <string name="privacy_policy">Політика конфіденційності</string>
+    <string name="exit">Вихід</string>
+    
+    <!-- Game Screen -->
+    <string name="level">Рівень</string>
+    <string name="score">Рахунок</string>
+    <string name="your_answers">Ваші відповіді:</string>
+    
+    <!-- Game Over Screen -->
+    <string name="game_over_title">🎮 Game Over!</string>
+    <string name="your_result">Ваш результат</string>
+    <string name="new_record">Новий рекорд!</string>
+    <string name="tied_record">Повторення рекорду!</string>
+    <string name="try_again">Спробуйте ще раз!</string>
+    <string name="main_menu">Головне меню</string>
+    <string name="play_again">🔄 Грати знову</string>
+    
+    <!-- High Score Screen -->
+    <string name="high_scores_title">🏆 Рекорди</string>
+    <string name="place">Місце</string>
+    <string name="date">Дата</string>
+    <string name="result">Результат</string>
+    <string name="back">Назад</string>
+    <string name="clear_all">Очистити</string>
+    <string name="no_scores">Поки що немає рекордів</string>
+    
+    <!-- Privacy Policy Screen -->
+    <string name="privacy_policy_title">📋 Політика конфіденційності</string>
+    <string name="privacy_policy_content">Цей додаток не збирає персональні дані користувачів. Всі дані зберігаються локально на пристрої.</string>
+    
+    <!-- Common -->
+    <string name="loading">Завантаження...</string>
+    <string name="error">Помилка</string>
+    <string name="unknown_error">Невідома помилка</string>
+    <string name="no_scores_yet">Поки що немає рекордів</string>
+    <string name="clear_scores_confirmation">Ви впевнені, що хочете очистити всі рекорди?</string>
+    <string name="yes">Так</string>
+    <string name="no">Ні</string>
 </resources>
