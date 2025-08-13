@@ -1,5 +1,7 @@
 package com.example.funnycombination.presentation.navigation
 
+import androidx.compose.animation.*
+import androidx.compose.animation.core.*
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -38,7 +40,7 @@ fun AppNavGraph(navController: NavHostController, modifier: Modifier = Modifier)
         startDestination = NavRoutes.SPLASH,
         modifier = modifier
     ) {
-        composable(NavRoutes.SPLASH) {
+        composable(route = NavRoutes.SPLASH) {
             SplashScreen(onTimeout = {
                 navController.navigate(NavRoutes.MAIN_MENU) {
                     popUpTo(NavRoutes.SPLASH) { inclusive = true }
@@ -46,7 +48,7 @@ fun AppNavGraph(navController: NavHostController, modifier: Modifier = Modifier)
             })
         }
         
-        composable(NavRoutes.MAIN_MENU) {
+        composable(route = NavRoutes.MAIN_MENU) {
             val context = LocalContext.current
             MainMenuScreen(
                 onPlay = { 
@@ -71,7 +73,7 @@ fun AppNavGraph(navController: NavHostController, modifier: Modifier = Modifier)
             )
         }
         
-        composable(NavRoutes.GAME) {
+        composable(route = NavRoutes.GAME) {
             val gameViewModel: GameViewModel = hiltViewModel()
             val gameState by gameViewModel.state.collectAsState()
             
@@ -126,7 +128,7 @@ fun AppNavGraph(navController: NavHostController, modifier: Modifier = Modifier)
             }
         }
         
-        composable(NavRoutes.GAME_OVER) { backStackEntry ->
+        composable(route = NavRoutes.GAME_OVER) { backStackEntry ->
             val score = backStackEntry.arguments?.getString("score")?.toIntOrNull() ?: 0
             
             val highScoreViewModel: HighScoreViewModel = hiltViewModel()
@@ -175,7 +177,7 @@ fun AppNavGraph(navController: NavHostController, modifier: Modifier = Modifier)
             }
         }
         
-        composable(NavRoutes.HIGH_SCORE) {
+        composable(route = NavRoutes.HIGH_SCORE) {
             val highScoreViewModel: HighScoreViewModel = hiltViewModel()
             val highScores by highScoreViewModel.highScores.collectAsState()
             
@@ -194,7 +196,7 @@ fun AppNavGraph(navController: NavHostController, modifier: Modifier = Modifier)
             )
         }
         
-        composable(NavRoutes.PRIVACY_POLICY) {
+        composable(route = NavRoutes.PRIVACY_POLICY) {
             PrivacyPolicyScreen(onBack = { 
                 navController.popBackStack()
             })

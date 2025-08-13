@@ -66,7 +66,16 @@ class GameViewModel @Inject constructor() : ViewModel() {
     }
 
     private fun addToSequence() {
-        _sequence.add(emojis.random())
+        // Додаємо випадкове емодзі
+        val newEmoji = emojis.random()
+        
+        // З мінімальним шансом (5%) додаємо повторюване емодзі підряд
+        if (_sequence.isNotEmpty() && _sequence.last() == newEmoji && kotlin.random.Random.nextFloat() < 0.05f) {
+            // Додаємо ще одне таке ж емодзі
+            _sequence.add(newEmoji)
+        }
+        
+        _sequence.add(newEmoji)
         _userInput.clear()
         updateState()
     }
